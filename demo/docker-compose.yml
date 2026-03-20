@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: imagelite
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+
+  pdadmin:
+    image:  dpage/pgadmin4
+    restart: always
+    environment:
+      PDADMIN_DEFAULT_PASSWORD: admin
+      PDADMIN_DEFAULT_EMAIL: admin@admin.com
+    ports:
+      - '15432:80'
+    depends_on:
+      - db
