@@ -1,15 +1,12 @@
-import { PrimeiroComponente } from "../components/PrimeiroComponente";
+import { Template} from "../components/TemplateProgs";
 
 export default function formularioPage() {
   return (
-   <div>
-     <main>
+    <main>
       <h1>Formulário</h1> 
-      <PrimeiroComponente
-      mensagem =  " Está é uma mensagem passada como propriedade do primeiroCompopnente" 
-      mensagemBotao = "Você clicou botão"
-      />
+      <Template>
+        <h1>Conteúdo do Formulário</h1>
+      </Template>
     </main>
-   </div>
   )
 } 
