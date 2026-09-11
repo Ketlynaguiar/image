@@ -1,7 +1,8 @@
-import { Image } from "./image";
+import { Image } from "./Image";
 
-class ImageService {
-    baseURL: string = ''
+export class ImageService {
+
+    baseURL: string = 'http://localhost:8080/images'
      async buscar(): Promise<Image[]> {
         const resposne = await fetch(this.baseURL);
         return await  resposne.json();
@@ -9,4 +10,4 @@ class ImageService {
      }
 }
  
-export const useImage = () => new ImageService();
+export const imageService = () => new ImageService();
