@@ -1,31 +1,32 @@
-interface TemplateProgs {
+import React from 'react';
+
+interface TemplateProps{
     children: React.ReactNode;
+
 }
- export const Template: React.FC<TemplateProgs> =(progs: TemplateProgs) =>{
-    return (
-     <>
-        <header/>
-       {progs.children}
-       <footer/>
-     </>
-    )
- }
-
- const Header: React.FC = () => {
-    return (
-      <header className= "bg-indigo=950 text-white py-3">
-        <div className= " container mx-auto flex justify-betwee items-center px-4">
-            <h1>ImageLite</h1>
-        </div>
-      </header>
-    )
- }
-
- const Footer: React.FC = () => {
+export const Template = ({ children }: TemplateProps) => {
     return(
-        <footer className="big-indigo-950 text-white py-3">
+        <>
+        <Header />
+        {children}
+        <Footer />
+        </>
+    );
+}
+const Header: React.FC = () => {
+    return(
+        <header className="bg-red-900 text-white py-3">
         <div className="container mx-auto px-4 flex justify-between items-center px-4">
-            <h1>Developed by</h1>
+            <h1>ImageLite</h1>
+            </div>
+            </header>
+    );
+}
+const Footer: React.FC = () => {
+    return(
+        <footer className="bg-red-950 text-white py-3">
+        <div className="container mx-auto px-4 flex justify-between items-center px-4">
+            <h1>Developed by Ketlyn </h1>
             </div>
             </footer>
     );

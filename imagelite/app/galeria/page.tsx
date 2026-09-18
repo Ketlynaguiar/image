@@ -3,27 +3,26 @@
   //import { ImageCard } from '../components/Image';
   import { Template, ImageCard } from '../components';
   import { Image } from '../resouce/Image';
-  import { imageService } from '../resouce/Service'
+  import { ImageService, useImageService } from '../resouce/Service'
   import { useState } from 'react'
-
-  
   
   export default function Galeria() {
 
-    const useService = imageService();
+    const useService = useImageService();
     const [images, setImages] = useState<Image[]>([])
+    const[query, setQuery] = useState<string>('')
+    const[extension, setExtension] = useState<string> ('')
 
     async function searchImages(){
       const result = await useService.buscar();
       setImages(result);
-      console.table(result)
+      console.log(query)
     }
-
-    
 
     function renderImageCard(image: Image) {
       return(
-        <ImageCard imageName={image.name}
+        <ImageCard key = {image.url}
+                  imageName={image.name}
                   imageUrl={image.url}
                   imageSize={image.size}
                   uploadDate={image.uploadDate} />
@@ -37,15 +36,30 @@
     return (
       <main>
         <Template>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={searchImages}>
-          Mudar Imagem
-        </button>
+          <section className="flex flex-col items-center justify-center my-5">
+            <div className="flex space-x-4">
+              <input type="text" 
+              onChange={(event) => setQuery(event.target.value)}
+              className="border px-4 py-2 rounded-lg text-gray-900" placeholder="Buscar imagens..." />
+              <select onChange={Event => setExtension(Event.target.value)} 
+              className="border px-4 py-2 rounded-lg text-gray-900">
+                <option value="">All formats</option>
+                  <option value="PNG">PNG</option>
+                  <option value="JPG">JPG</option>
+                  <option value="GIF">GIF</option>
+                  <option value="JPEG">JPEG</option>
+              </select>
+              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" onClick={searchImages}>Search </button>
+              <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Add New </button>
+            </div>
+        </section>
             <section className="grid grid-cols-4 gap-4  p-4">
           {
             renderImageCards()
           }
             
             </section>
+
         </Template>
        
       </main>
