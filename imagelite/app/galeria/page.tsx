@@ -16,7 +16,7 @@
     async function searchImages(){
       const result = await useService.buscar();
       setImages(result);
-      console.log(query)
+      console.log(query, extension)
     }
 
     function renderImageCard(image: Image) {
@@ -25,6 +25,7 @@
                   imageName={image.name}
                   imageUrl={image.url}
                   imageSize={image.size}
+                  extension={image.extension}
                   uploadDate={image.uploadDate} />
       )
     }
@@ -41,7 +42,7 @@
               <input type="text" 
               onChange={(event) => setQuery(event.target.value)}
               className="border px-4 py-2 rounded-lg text-gray-900" placeholder="Buscar imagens..." />
-              <select onChange={Event => setExtension(Event.target.value)} 
+              <select onChange={event => setExtension(event.target.value)} 
               className="border px-4 py-2 rounded-lg text-gray-900">
                 <option value="">All formats</option>
                   <option value="PNG">PNG</option>
