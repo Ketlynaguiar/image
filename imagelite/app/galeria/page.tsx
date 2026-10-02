@@ -14,9 +14,10 @@
     const[extension, setExtension] = useState<string> ('')
 
     async function searchImages(){
-      const result = await useService.buscar();
+      const result = await useService.buscar(query, extension);
       setImages(result);
       console.log(query, extension)
+      
     }
 
     function renderImageCard(image: Image) {
