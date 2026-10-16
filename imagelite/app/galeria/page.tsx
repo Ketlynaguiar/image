@@ -62,13 +62,13 @@ import { Button } from '../components';
                   <option value="GIF">GIF</option>
                   <option value="JPEG">JPEG</option>
               </select>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" onClick={searchImages}>Search </button>
+              <button className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded" onClick={searchImages}>Search </button>
              <Button type="button"variant="danger"onClick={() => router.push('/upload')}>Add New</Button>
             </div>
         </section>
             {loading ? (
   <div className="flex justify-center items-center p-10">
-    <p className="text-xl font-bold text-purple-700">
+    <p className="text-xl font-bold text-black-700">
       Carregando...
     </p>
   </div>

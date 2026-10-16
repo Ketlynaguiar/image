@@ -1,6 +1,10 @@
+'use client'
 import { PrimeiroComponente } from "./components/PrimeiroComponente";
+import { useRouter } from "next/navigation";
+
 
 export default function Home() {
+  const router = useRouter();
 return (
   <div className="flex flex-col items-center justify-center min-h-screen bg-indigo-50 p-6">
     <img
@@ -11,9 +15,12 @@ return (
     <h1 className="text-3xl font-bold text-gray-800 mb-4">
       Primeiro Componente🌺
     </h1>
-    <button className="px-6 py-2.5 bg-pink-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 transition duration-200">
-      Clique aqui
-    </button>
+    <button
+        onClick={() => router.push("/galeria")}
+        className="relative z-10 px-6 py-2.5 bg-purple-900 text-white font-medium rounded-lg shadow-md hover:bg-purple-700 transition duration-200"
+      >
+        Clique aqui
+      </button>
   </div>
 );
 }
