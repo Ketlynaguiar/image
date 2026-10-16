@@ -1,6 +1,8 @@
 'use client'
 //import { Template } from '../components/Template';
   //import { ImageCard } from '../components/Image';
+import { useRouter } from 'next/navigation';
+import { Button } from '../components';
   import { Template, ImageCard } from '../components';
   import { Image } from '../resouce/Image';
   import { ImageService, useImageService } from '../resouce/Service'
@@ -8,17 +10,26 @@
   
   export default function Galeria() {
 
+    const router = useRouter();
     const useService = useImageService();
     const [images, setImages] = useState<Image[]>([])
     const[query, setQuery] = useState<string>('')
     const[extension, setExtension] = useState<string> ('')
+    const [loading, setLoading] = useState<boolean>(false);
 
-    async function searchImages(){
-      const result = await useService.buscar(query, extension);
-      setImages(result);
-      console.log(query, extension)
-      
-    }
+    async function searchImages() {
+  setLoading(true);
+
+  try {
+    const result = await useService.buscar(query, extension);
+    setImages(result);
+    console.log(query, extension);
+  } catch (error) {
+    console.error('Erro ao buscar imagens:', error);
+  } finally {
+    setLoading(false);
+  }
+}
 
     function renderImageCard(image: Image) {
       return(
@@ -52,15 +63,20 @@
                   <option value="JPEG">JPEG</option>
               </select>
               <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" onClick={searchImages}>Search </button>
-              <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Add New </button>
+             <Button type="button"variant="danger"onClick={() => router.push('/upload')}>Add New</Button>
             </div>
         </section>
-            <section className="grid grid-cols-4 gap-4  p-4">
-          {
-            renderImageCards()
-          }
-            
-            </section>
+            {loading ? (
+  <div className="flex justify-center items-center p-10">
+    <p className="text-xl font-bold text-purple-700">
+      Carregando...
+    </p>
+  </div>
+) : (
+  <section className="grid grid-cols-4 gap-4 p-4">
+    {renderImageCards()}
+  </section>
+)}
 
         </Template>
        
