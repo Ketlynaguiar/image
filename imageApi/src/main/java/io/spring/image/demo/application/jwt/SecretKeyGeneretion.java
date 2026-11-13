@@ -1,5 +1,6 @@
 package io.spring.image.demo.application.jwt;
 
+
 import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Component;
 
